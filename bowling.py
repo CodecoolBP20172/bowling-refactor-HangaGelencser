@@ -4,7 +4,7 @@ def score(game):
     in_first_half = True
     for roll in range(len(game)):
         if game[roll] == '/':
-            result += 10 -last
+            result += 10 - get_value(game[roll-1])
         else:
             result += get_value(game[roll])
         if frame < 10  and get_value(game[roll]) == 10:
@@ -16,14 +16,13 @@ def score(game):
                     result += 10 - get_value(game[roll+1])
                 else:
                     result += get_value(game[roll+2])
-        last = get_value(game[roll])
         if not in_first_half:
             frame += 1
         if in_first_half == True:
             in_first_half = False
         else:
             in_first_half = True
-        if game[roll].upper() == 'X':
+        if game[roll] == 'X' or game[roll] == 'x':
             in_first_half = True
             frame += 1
     return result
