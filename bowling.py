@@ -2,12 +2,14 @@ def score(game):
     result = 0
     frame = 1
     in_first_half = True
+
     for roll in range(len(game)):
         if game[roll] == '/':
             result += 10 - get_value(game[roll-1])
         else:
             result += get_value(game[roll])
-        if frame < 10  and get_value(game[roll]) == 10:
+
+        if frame < 10 and get_value(game[roll]) == 10:
             if game[roll] == '/':
                 result += get_value(game[roll+1])
             elif game[roll].upper() == 'X':
@@ -16,13 +18,14 @@ def score(game):
                     result += 10 - get_value(game[roll+1])
                 else:
                     result += get_value(game[roll+2])
+
         if not in_first_half:
             frame += 1
-        if in_first_half == True:
+        if in_first_half:
             in_first_half = False
         else:
             in_first_half = True
-        if game[roll] == 'X' or game[roll] == 'x':
+        if game[roll].upper() == 'X':
             in_first_half = True
             frame += 1
     return result
